@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import *
 from .forms import LoginStudent,RegStudent
 
@@ -16,17 +16,39 @@ def registerStudent(request):
 
 
 def loginStudent(request):
-    if request.method == 'POST':
-        form = LoginStudent(request.POST)
-        if form.is_valid():
-            form.save()
-            return render(request, 'temp/index.html')
-        
-    else:
-        form = LoginStudent()
 
-    return render(request, 'temp/login.html', {'form':form})
+    form = LoginStudent()
+
+    if request.method == 'POST':
+
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        stud = Student.objects.filter(
+            username=username,
+            password=password
+        ).first()
+
+        if stud:
+            request.session['stud_id'] = stud.id
+            return redirect('dashboard')
+
+        else:
+            error = "Invalid Username or Password"
+            return render(request, 'temp/login.html', {
+                'form': form,
+                'error': error
+            })
+
+    return render(request, 'temp/login.html', {'form': form})
 
 def studentList(request):
     student = Student.objects.all()
     return render(request, 'temp/studlist.html', {'stud':student})
+
+
+def studDashboard(request):
+
+    stud_id = request.session.get('student_id')
+    stud = Student.objects.filter(id=stud_id).first()
+    return render(request, 'temp/index.html', {'stud': stud})
