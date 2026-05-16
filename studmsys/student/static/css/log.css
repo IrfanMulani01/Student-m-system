@@ -1,0 +1,14 @@
+body {
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+}
+.glass {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(16px);
+}
+.input-field {
+    transition: all 0.3s;
+}
+.input-field:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgb(99 102 241 / 0.3);
+}
