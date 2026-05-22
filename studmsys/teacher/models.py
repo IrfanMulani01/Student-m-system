@@ -37,3 +37,9 @@ class Teacher(models.Model):
     age = models.IntegerField()
     address = models.TextField()
     
+    classChoice = [
+        ('FY', 'First Year'),
+        ('SY', 'Second Year'),
+        ('TY', 'Third Year'),
+    ]
+    classse = models.CharField(choices=classChoice, max_length=50)
