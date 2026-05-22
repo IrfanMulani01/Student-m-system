@@ -1,6 +1,7 @@
 from django import forms
+from django.shortcuts import render
 from .models import Teacher
-
+from student.models import *
 
 class TeacherLogin(forms.Form):
     class Meta:
@@ -16,8 +17,14 @@ class TeacherLogin(forms.Form):
         return age
     
     
-# class StudentList(forms.Form):
-#     class Meta:
-#         model = 
+class StudentList(forms.Form):
+    class Meta:
+        model = Student
 
 
+class ManageSubject(forms.Form):
+    class Meta:
+        
+        model = Teacher
+        
+        fields = ['subject']
