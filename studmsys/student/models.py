@@ -20,6 +20,8 @@ class Student(models.Model):
         ('O', 'Other'),
     ]
     gender = models.CharField(max_length=1, choices=genchoice)
+    
+    classes = models.CharField(max_length=50)
 
     address = models.TextField()
     create_at = models.DateTimeField(auto_now_add=True)
