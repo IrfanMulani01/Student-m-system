@@ -20,6 +20,7 @@ class TeacherLogin(forms.Form):
 class StudentList(forms.Form):
     class Meta:
         model = Student
+        fields = ['fname', 'classes']
 
 
 class ManageSubject(forms.Form):
